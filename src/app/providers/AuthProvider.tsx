@@ -5,11 +5,11 @@ import {
   useEffect,
   useMemo,
   useState,
-  type PropsWithChildren
-} from 'react';
-import { api, ApiError } from '../../lib/api';
-import { tokenStore } from '../../lib/tokenStore';
-import type { Account } from '../../lib/types';
+  type PropsWithChildren,
+} from "react";
+import { api, ApiError } from "../../lib/api";
+import { tokenStore } from "../../lib/tokenStore";
+import type { Account } from "../../lib/types";
 
 interface AuthContextValue {
   user: Account | null;
@@ -65,9 +65,9 @@ export function AuthProvider({ children }: PropsWithChildren) {
       loading,
       isAuthenticated: Boolean(user && tokenStore.get()),
       refreshUser,
-      signOut
+      signOut,
     }),
-    [loading, refreshUser, signOut, user]
+    [loading, refreshUser, signOut, user],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
@@ -76,7 +76,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within AuthProvider');
+    throw new Error("useAuth must be used within AuthProvider");
   }
   return context;
 }

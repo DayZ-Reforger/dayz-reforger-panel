@@ -17,6 +17,7 @@ import { ChannelSelect } from "../../components/forms/ChannelSelect";
 import { RoleMultiSelect } from "../../components/forms/RoleMultiSelect";
 import { RoleSelect } from "../../components/forms/RoleSelect";
 import { Switch } from "../../components/forms/Switch";
+import { useAuth } from "../../app/providers/AuthProvider";
 
 const TAB_LABELS = [
   "overview",
@@ -54,6 +55,7 @@ export function GuildWorkspacePage() {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [roles, setRoles] = useState<DiscordRole[]>([]);
+  const { refreshUser } = useAuth();
 
   useEffect(() => {
     async function loadRoles() {
@@ -183,6 +185,7 @@ export function GuildWorkspacePage() {
     const confirmed = window.confirm(
       "Unlink this guild from its Nitrado service?",
     );
+
     if (!confirmed) {
       return;
     }
@@ -193,6 +196,7 @@ export function GuildWorkspacePage() {
 
     try {
       await api.unlinkGuild(guildId);
+      await refreshUser();
       navigate("/dashboard/guilds", { replace: true });
     } catch (unlinkError) {
       setError(
