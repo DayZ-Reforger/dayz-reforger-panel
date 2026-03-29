@@ -1,0 +1,74 @@
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 0 1rem;
+    border-radius: 10px;
+    border: 1px solid var(--line-strong);
+    font-weight: 700;
+    transition: 160ms ease;
+    background: transparent;
+    color: var(--text);
+}
+
+.button:hover:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.button--primary {
+    background: linear-gradient(180deg, var(--accent-strong), var(--accent));
+    border-color: rgba(230, 130, 71, 0.35);
+    color: #120f0d;
+}
+
+.button--secondary {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text);
+}
+
+.button--sm {
+    min-height: 40px;
+    padding: 0 0.9rem;
+}
+
+.button--full {
+    width: 100%;
+}
+
+.text-link {
+    color: var(--accent-strong);
+    font-weight: 600;
+}
+
+.text-link:hover {
+    color: var(--text);
+}
+
+.action-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 138px;
+    min-height: 40px;
+    padding: 0 0.95rem;
+    border-radius: 10px;
+    border: 1px solid rgba(230, 130, 71, 0.24);
+    background: rgba(230, 130, 71, 0.08);
+    color: var(--accent-strong);
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+    transition: 160ms ease;
+}
+
+.action-link:hover {
+    border-color: rgba(230, 130, 71, 0.38);
+    background: rgba(230, 130, 71, 0.12);
+    color: #f0b189;
+    transform: translateY(-1px);
+}
+
+.action-link--compact {
+    min-width: 88px;
+}

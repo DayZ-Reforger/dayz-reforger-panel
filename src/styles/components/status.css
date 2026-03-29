@@ -1,0 +1,36 @@
+.status-badge,
+.topbar__pill,
+.hero__rail span {
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.035);
+    color: var(--text-muted);
+    padding: 0.55rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.status-badge--success {
+    color: #dceccc;
+    border-color: rgba(123, 157, 98, 0.34);
+    background: rgba(123, 157, 98, 0.12);
+}
+
+.status-badge--warning {
+    color: #f1debe;
+    border-color: rgba(182, 136, 75, 0.34);
+    background: rgba(182, 136, 75, 0.12);
+}
+
+.status-badge--danger {
+    color: #f3cec7;
+    border-color: rgba(158, 83, 76, 0.34);
+    background: rgba(158, 83, 76, 0.12);
+}
+
+.status-badge--neutral {
+    color: var(--text-muted);
+    border-color: rgba(255, 255, 255, 0.09);
+    background: rgba(255, 255, 255, 0.035);
+}

@@ -1,0 +1,25 @@
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.topbar h1 {
+    font-size: 2rem;
+}
+
+.topbar__meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.topbar__pill--accent {
+    color: var(--text);
+    border-color: rgba(230, 130, 71, 0.24);
+}

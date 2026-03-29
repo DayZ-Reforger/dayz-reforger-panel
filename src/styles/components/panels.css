@@ -1,0 +1,115 @@
+.preview-panel,
+.section-card,
+.feature-card,
+.step-card,
+.integration-card,
+.fullscreen-state__card,
+.cta-banner,
+.sidebar__account,
+.list-row,
+.empty-state,
+.hero-panel {
+    border: 1px solid var(--line);
+    background: linear-gradient(180deg, rgba(25, 29, 34, 0.98), rgba(18, 21, 26, 0.98));
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.preview-panel,
+.feature-card,
+.step-card,
+.integration-card,
+.section-card {
+    padding: 1.4rem;
+}
+
+.hero-panel {
+    width: min(100%, 460px);
+    padding: 1.5rem;
+}
+
+.preview-panel__header h3,
+.integration-card h3,
+.feature-card h3,
+.step-card h3,
+.section-card h2 {
+    margin: 0.35rem 0 0;
+}
+
+.preview-panel__stats,
+.stat-grid,
+.integration-grid,
+.feature-grid,
+.steps-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.preview-panel__stats,
+.stat-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 1.4rem 0;
+}
+
+.stat-tile,
+.stat-panel {
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--line);
+}
+
+.stat-tile__label,
+.stat-panel__label,
+.sidebar__account-meta {
+    display: block;
+    color: var(--text-soft);
+    font-size: 0.86rem;
+    margin-bottom: 0.3rem;
+}
+
+.preview-panel__block,
+.preview-panel__list {
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+}
+
+.preview-list-row,
+.list-row {
+    padding: 0.95rem 1rem;
+}
+
+.preview-list-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+}
+
+.feature-card__bar {
+    width: 48px;
+    height: 4px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    margin-bottom: 1rem;
+}
+
+.step-card__index {
+    display: inline-block;
+    color: var(--accent-strong);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.cta-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+.empty-state {
+    padding: 1.25rem;
+}

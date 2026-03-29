@@ -1,0 +1,13 @@
+.app-shell {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+}
+
+.app-shell__main {
+    min-width: 0;
+}
+
+.app-content {
+    padding: 2rem;
+}

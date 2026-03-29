@@ -1,0 +1,107 @@
+.sidebar {
+    position: sticky;
+    top: 0;
+    width: 280px;
+    min-height: 100vh;
+    height: 100vh;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(180deg, #05080d 0%, #070b11 100%);
+    display: flex;
+    flex-direction: column;
+    padding: 1.2rem;
+}
+
+.sidebar__brand {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.25rem 0;
+    text-decoration: none;
+}
+
+.sidebar__brand-logo {
+    width: 100%;
+    max-width: 220px;
+    height: auto;
+    object-fit: contain;
+}
+
+.sidebar__nav {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+.sidebar__link {
+    display: flex;
+    align-items: center;
+    min-height: 52px;
+    padding: 0 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.02);
+    color: #d8d4cb;
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.sidebar__link:hover,
+.sidebar__link.is-active {
+    border-color: rgba(214, 126, 62, 0.45);
+    background: rgba(255, 255, 255, 0.04);
+    color: #f2eee6;
+}
+
+.sidebar__footer {
+    margin-top: auto;
+    padding-top: 1.5rem;
+}
+
+.sidebar__account {
+    display: grid;
+    gap: 1rem;
+    padding: 1.15rem;
+}
+
+.sidebar__account-copy {
+    min-width: 0;
+    display: grid;
+    gap: 0.2rem;
+}
+
+.sidebar__account-name {
+    font-weight: 700;
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+}
+
+.sidebar__account-plan-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.sidebar__account-plan-label {
+    color: var(--text-soft);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.sidebar__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 1px solid var(--line);
+}
+
+.sidebar__avatar--fallback {
+    width: 48px;
+    height: 48px;
+}
