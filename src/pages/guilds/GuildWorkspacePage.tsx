@@ -9,6 +9,7 @@ import type {
   GuildReadinessResponse,
   DiscordRole,
 } from "../../lib/types";
+import { ConfirmDialog } from "../../components/ui/ConfirmDialog";
 import { SectionCard } from "../../components/dashboard/SectionCard";
 import { SetupChecklist } from "../../components/dashboard/SetupChecklist";
 import { StatusBadge } from "../../components/ui/StatusBadge";
@@ -56,6 +57,7 @@ export function GuildWorkspacePage() {
   const [message, setMessage] = useState("");
   const [roles, setRoles] = useState<DiscordRole[]>([]);
   const { refreshUser } = useAuth();
+  const [showUnlinkDialog, setShowUnlinkDialog] = useState(false);
 
   useEffect(() => {
     async function loadRoles() {
@@ -182,14 +184,6 @@ export function GuildWorkspacePage() {
   }
 
   async function handleUnlink() {
-    const confirmed = window.confirm(
-      "Unlink this guild from its Nitrado service?",
-    );
-
-    if (!confirmed) {
-      return;
-    }
-
     setActionLoading("unlink");
     setError("");
     setMessage("");
@@ -206,6 +200,7 @@ export function GuildWorkspacePage() {
       );
     } finally {
       setActionLoading("");
+      setShowUnlinkDialog(false);
     }
   }
 
@@ -279,7 +274,7 @@ export function GuildWorkspacePage() {
             </button>
             <button
               className="button button--secondary button--sm"
-              onClick={handleUnlink}
+              onClick={() => setShowUnlinkDialog(true)}
               disabled={Boolean(actionLoading)}
             >
               {actionLoading === "unlink" ? "Unlinking..." : "Unlink"}
@@ -604,6 +599,22 @@ export function GuildWorkspacePage() {
           </div>
         ) : null}
       </SectionCard>
+
+      <ConfirmDialog
+        open={showUnlinkDialog}
+        tone="danger"
+        title="Unlink this guild from its Nitrado service?"
+        description="Killfeed, log parsing, welcome routing, and other linked service actions will stop for this guild after unlinking. Your saved guild configuration will remain in place, so you can relink this guild later without setting everything up again."
+        confirmLabel="Unlink service"
+        cancelLabel="Keep linked"
+        loading={actionLoading === "unlink"}
+        onConfirm={handleUnlink}
+        onCancel={() => {
+          if (!actionLoading) {
+            setShowUnlinkDialog(false);
+          }
+        }}
+      />
     </div>
   );
 }

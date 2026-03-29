@@ -6,6 +6,7 @@
 @import "./components/status.css";
 @import "./components/tables.css";
 @import "./components/select.css";
+@import "./components/confirm-dialog.css";
 @import "./layout/dashboard-shell.css";
 @import "./layout/sidebar.css";
 @import "./layout/topbar.css";
