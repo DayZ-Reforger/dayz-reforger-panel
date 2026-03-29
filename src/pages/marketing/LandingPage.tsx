@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo_combined_sidebar.png";
 import { getDiscordLoginUrl } from "../../lib/api";
+import { BetaBadge } from "../../components/ui/BetaBadge";
+import { SiteFooter } from "../../components/layout/Footer";
 
 const featureItems = [
   {
@@ -67,17 +69,20 @@ export function LandingPage() {
     <div className="landing-page">
       <header className="marketing-header">
         <div className="marketing-header__inner">
-          <Link
-            to="/"
-            className="marketing-header__brand"
-            aria-label="DayZ Reforger home"
-          >
-            <img
-              src={logo}
-              alt="DayZ Reforger"
-              className="marketing-header__logo"
-            />
-          </Link>
+          <div className="marketing-header__brand-wrap">
+            <Link
+              to="/"
+              className="marketing-header__brand"
+              aria-label="DayZ Reforger home"
+            >
+              <img
+                src={logo}
+                alt="DayZ Reforger"
+                className="marketing-header__logo"
+              />
+            </Link>
+            <BetaBadge compact />
+          </div>
 
           <nav
             className="marketing-header__nav"
@@ -299,6 +304,7 @@ export function LandingPage() {
           </div>
         </section>
       </main>
+      <SiteFooter />
     </div>
   );
 }

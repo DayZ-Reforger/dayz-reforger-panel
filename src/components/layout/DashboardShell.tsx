@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../../app/providers/AuthProvider";
-import { getApiBaseUrl } from "../../lib/api";
+import { BetaBadge } from "../ui/BetaBadge";
+import { SiteFooter } from "./Footer";
 import { SidebarNav } from "./sidebar/SidebarNav";
 
 const PAGE_META: Record<string, { eyebrow: string; title: string }> = {
@@ -15,6 +16,7 @@ const PAGE_META: Record<string, { eyebrow: string; title: string }> = {
 export function DashboardShell() {
   const location = useLocation();
   const { user } = useAuth();
+
   const pageMeta = PAGE_META[location.pathname] ?? {
     eyebrow: "Guild workspace",
     title: "Server configuration",
@@ -28,25 +30,38 @@ export function DashboardShell() {
   return (
     <div className="app-shell">
       <SidebarNav />
+
       <div className="app-shell__main">
         <header className="topbar">
-          <div>
-            <div className="eyebrow">{pageMeta.eyebrow}</div>
+          <div className="topbar__heading">
+            <div className="topbar__eyebrow-row">
+              <div className="eyebrow">{pageMeta.eyebrow}</div>
+              <BetaBadge compact />
+            </div>
+
             <h1>{pageMeta.title}</h1>
           </div>
+
           <div className="topbar__meta">
             <span className="topbar__pill">Discord connected</span>
+
             <span
               className={`topbar__pill${nitradoConnected ? " topbar__pill--accent" : ""}`}
             >
               {nitradoConnected ? "Nitrado linked" : "Nitrado not linked"}
             </span>
+
             <span className="topbar__pill">Usage {usage}</span>
           </div>
         </header>
+
         <main className="app-content">
           <Outlet />
         </main>
+
+        <div className="app-shell__footer">
+          <SiteFooter />
+        </div>
       </div>
     </div>
   );

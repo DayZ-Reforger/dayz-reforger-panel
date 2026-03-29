@@ -34,3 +34,24 @@
     border-color: rgba(255, 255, 255, 0.09);
     background: rgba(255, 255, 255, 0.035);
 }
+.beta-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 28px;
+    padding: 0 0.7rem;
+    border: 1px solid rgba(214, 126, 62, 0.28);
+    border-radius: 999px;
+    background: rgba(214, 126, 62, 0.1);
+    color: #f0d4bf;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.beta-badge--compact {
+    min-height: 24px;
+    padding: 0 0.55rem;
+    font-size: 0.72rem;
+}

@@ -532,3 +532,21 @@
         width: 100%;
     }
 }
+.marketing-header__brand-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.marketing-header__brand {
+    display: inline-flex;
+    align-items: center;
+    line-height: 0;
+}
+
+.marketing-header__logo {
+    display: block;
+    width: 180px;
+    height: auto;
+    object-fit: contain;
+}
