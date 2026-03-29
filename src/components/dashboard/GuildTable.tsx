@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { getGuildIconUrl } from "../../lib/format";
 import type { EnrichedGuild, NitradoServiceSummary } from "../../lib/types";
 import { StatusBadge } from "../ui/StatusBadge";
+import { ServiceSelect } from "../forms/ServiceSelect";
 
 interface Props {
   guilds: EnrichedGuild[];
@@ -88,20 +89,23 @@ export function GuildTable({
                       </div>
                     </div>
                   ) : availableServices.length > 0 ? (
-                    <select
-                      className="table-select"
+                    <ServiceSelect
+                      id={`service-${guild.id}`}
                       value={currentServiceId}
-                      onChange={(event) =>
-                        onSelectService(guild.id, event.target.value)
+                      services={availableServices.map((service) => ({
+                        id: String(service.id),
+                        label: service.display_name,
+                        linkedGuildId:
+                          service.linked_guild_id &&
+                          service.linked_guild_id !== guild.id
+                            ? service.linked_guild_id
+                            : undefined,
+                      }))}
+                      onChange={(nextValue) =>
+                        onSelectService(guild.id, nextValue)
                       }
-                    >
-                      <option value="">Choose service</option>
-                      {availableServices.map((service) => (
-                        <option key={service.id} value={String(service.id)}>
-                          {service.display_name}
-                        </option>
-                      ))}
-                    </select>
+                      placeholder="Choose service"
+                    />
                   ) : (
                     <span className="muted-text">No available services</span>
                   )}
