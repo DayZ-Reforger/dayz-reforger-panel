@@ -67,3 +67,28 @@
     background: rgba(255, 255, 255, 0.03);
     color: var(--text);
 }
+
+.guild-service-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.guild-service-cell__setup-warning {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: 0.2rem;
+    flex-wrap: wrap;
+}
+
+.table-actions__stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+}
+
+.action-link--warning {
+    color: #f0c9a8;
+}

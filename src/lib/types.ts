@@ -133,6 +133,7 @@ export interface GuildAttributes {
   connection_logs_channel: string;
   base_build_logs_channel: string;
   active_players_channel: string;
+  active_players_message_id: string;
   welcome_channel: string;
   send_welcome_message: boolean;
   welcome_message: string;

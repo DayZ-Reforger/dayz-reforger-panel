@@ -35,12 +35,12 @@ export function ConfirmDialog({
         aria-describedby="confirm-dialog-description"
         onClick={(event) => event.stopPropagation()}
       >
-        <div className="confirm-dialog__header">
-          <div className="confirm-dialog__icon-wrap">
+        <div className="confirm-dialog__content">
+          <div className="confirm-dialog__icon-wrap" aria-hidden="true">
             <span className="confirm-dialog__icon">!</span>
           </div>
 
-          <div className="confirm-dialog__copy">
+          <div className="confirm-dialog__text">
             <h3 id="confirm-dialog-title" className="confirm-dialog__title">
               {title}
             </h3>
@@ -54,7 +54,7 @@ export function ConfirmDialog({
           </div>
         </div>
 
-        <div className="confirm-dialog__actions">
+        <div className="confirm-dialog__footer">
           <button
             type="button"
             className="button button--secondary"

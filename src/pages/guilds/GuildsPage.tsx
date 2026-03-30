@@ -12,6 +12,11 @@ import type {
   DiscordGuild,
 } from "../../lib/types";
 
+type GuildBotSetupState = {
+  botPresent: boolean;
+  inviteUrl?: string;
+};
+
 export function GuildsPage() {
   const { user, refreshUser } = useAuth();
   const [guilds, setGuilds] = useState<DiscordGuild[]>([]);
@@ -24,6 +29,38 @@ export function GuildsPage() {
   const [selectedServiceId, setSelectedServiceId] = useState<
     Record<string, string>
   >({});
+  const [botSetupByGuildId, setBotSetupByGuildId] = useState<
+    Record<string, GuildBotSetupState>
+  >({});
+
+  async function loadBotSetupStates(guilds: EnrichedGuild[]) {
+    const linkedGuilds = guilds.filter((guild) => guild.linked);
+
+    const results = await Promise.all(
+      linkedGuilds.map(async (guild) => {
+        try {
+          const response = await api.getGuildChannels(guild.id);
+
+          return [
+            guild.id,
+            {
+              botPresent: Boolean(response.bot_present),
+              inviteUrl: response.invite_url,
+            },
+          ] as const;
+        } catch {
+          return [
+            guild.id,
+            {
+              botPresent: false,
+            },
+          ] as const;
+        }
+      }),
+    );
+
+    setBotSetupByGuildId(Object.fromEntries(results));
+  }
 
   async function load() {
     setLoading(true);
@@ -47,6 +84,7 @@ export function GuildsPage() {
       setGuilds(guildsResponse.guilds);
       setLinkedGuilds(linkedResponse.guilds);
       setServices(servicesResponse.services);
+      loadBotSetupStates(enrichedGuilds);
     } catch (loadError) {
       setError(
         loadError instanceof Error
@@ -145,6 +183,7 @@ export function GuildsPage() {
             guilds={enrichedGuilds}
             services={services}
             linkingGuildId={linkingGuildId}
+            botSetupByGuildId={botSetupByGuildId}
             selectedServiceId={selectedServiceId}
             onSelectService={(guildId, serviceId) => {
               setSelectedServiceId((current) => ({

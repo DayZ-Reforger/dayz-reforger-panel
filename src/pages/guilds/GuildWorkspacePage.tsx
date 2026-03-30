@@ -322,6 +322,26 @@ export function GuildWorkspacePage() {
 
         {activeTab === "overview" ? (
           <div className="page-grid">
+            {!channelsResponse?.bot_present ? (
+              <div className="empty-state">
+                <p>
+                  The bot has not been added to this Discord server yet. Invite
+                  it now so channel routing, role-based actions, and live server
+                  features can work.
+                </p>
+
+                {channelsResponse?.invite_url ? (
+                  <a
+                    className="button button--primary button--sm"
+                    href={channelsResponse.invite_url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Invite bot
+                  </a>
+                ) : null}
+              </div>
+            ) : null}
             <div className="stat-grid">
               <div className="stat-panel">
                 <span className="stat-panel__label">Guild</span>
