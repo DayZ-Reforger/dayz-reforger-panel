@@ -12,7 +12,7 @@
 }
 
 .confirm-dialog {
-    width: min(100%, 520px);
+    width: min(100%, 560px);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 22px;
     background: linear-gradient(
@@ -26,61 +26,69 @@
     overflow: hidden;
 }
 
-.confirm-dialog__header {
-    display: flex;
-    align-items: flex-start;
+.confirm-dialog__content {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr);
     gap: 1rem;
-    padding: 1.35rem 1.35rem 1rem;
+    padding: 1.4rem 1.4rem 1.15rem;
+    align-items: start;
 }
 
 .confirm-dialog__icon-wrap {
-    width: 44px;
-    height: 44px;
-    flex: 0 0 auto;
-    border-radius: 14px;
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(214, 126, 62, 0.12);
-    border: 1px solid rgba(214, 126, 62, 0.2);
+    background: rgba(214, 126, 62, 0.1);
+    border: 1px solid rgba(214, 126, 62, 0.18);
 }
 
 .confirm-dialog--danger .confirm-dialog__icon-wrap {
-    background: rgba(196, 76, 76, 0.14);
-    border-color: rgba(196, 76, 76, 0.24);
+    background: rgba(196, 76, 76, 0.12);
+    border-color: rgba(196, 76, 76, 0.22);
 }
 
 .confirm-dialog__icon {
-    color: #f2ece2;
-    font-size: 1rem;
+    color: #f5efe5;
+    font-size: 1.05rem;
     font-weight: 800;
     line-height: 1;
 }
 
-.confirm-dialog__copy {
+.confirm-dialog__text {
     min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    padding-top: 0.15rem;
 }
 
 .confirm-dialog__title {
     margin: 0;
     color: #f5efe5;
-    font-size: 1.2rem;
+    font-size: 1.35rem;
     font-weight: 700;
     line-height: 1.2;
+    letter-spacing: -0.01em;
 }
 
 .confirm-dialog__description {
-    margin: 0.65rem 0 0;
+    margin: 0;
     color: #b0a89d;
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 0.98rem;
+    line-height: 1.7;
+    max-width: 46ch;
 }
 
-.confirm-dialog__actions {
+.confirm-dialog__footer {
     display: flex;
     justify-content: flex-end;
     gap: 0.75rem;
-    padding: 0 1.35rem 1.35rem;
+    padding: 1rem 1.4rem 1.4rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.012);
 }
 
 .button--danger {
@@ -92,4 +100,24 @@
 .button--danger:hover:not(:disabled) {
     border-color: rgba(196, 76, 76, 0.42);
     background: rgba(196, 76, 76, 0.2);
+}
+
+@media (max-width: 640px) {
+    .confirm-dialog__content {
+        grid-template-columns: 1fr;
+        gap: 0.9rem;
+    }
+
+    .confirm-dialog__icon-wrap {
+        width: 48px;
+        height: 48px;
+    }
+
+    .confirm-dialog__footer {
+        flex-direction: column-reverse;
+    }
+
+    .confirm-dialog__footer .button {
+        width: 100%;
+    }
 }
