@@ -141,6 +141,7 @@ export interface GuildAttributes {
   used_armbands: string[];
   excluded_roles: string[];
   bot_admin_roles: string[];
+  admin_alert_role: string;
   web_admin_user_ids: string[];
   alarms: unknown[];
   events: unknown[];

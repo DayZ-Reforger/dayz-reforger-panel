@@ -453,6 +453,16 @@ export function GuildWorkspacePage() {
               onChange={(value) => setField("linked_gamertag_role", value)}
             />
 
+            <RoleSelect
+              label="Admin alert role"
+              value={draft.admin_alert_role ?? ""}
+              roles={roles}
+              hint="Role to alert admins of combat logs and more"
+              onChange={(value) => setField("admin_alert_role", value)}
+            />
+
+            <br />
+
             <RoleMultiSelect
               label="Bot admin roles"
               hint="Members with these roles can use elevated bot controls."

@@ -21,14 +21,13 @@ export function RoleSelect({
   value,
   roles,
   onChange,
-  placeholder = "No role",
+  placeholder = "Select a role",
   hint,
   includeManaged = false,
   disabled = false,
   allowUnset = true,
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
-
   const rootRef = useRef<HTMLDivElement | null>(null);
 
   const sortedRoles = useMemo(() => {
@@ -44,6 +43,11 @@ export function RoleSelect({
   const selectedColor = selectedRole
     ? discordColorToCss(selectedRole.color)
     : undefined;
+
+  const hasRoleMeta = Boolean(
+    selectedRole &&
+    (selectedRole.hoist || selectedRole.mentionable || selectedRole.managed),
+  );
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent): void {
@@ -99,41 +103,6 @@ export function RoleSelect({
       </label>
 
       {hint ? <p className="field__hint">{hint}</p> : null}
-
-      <div className="role-preview-slot">
-        {selectedRole ? (
-          <div className="role-preview">
-            <span
-              className="role-preview__swatch"
-              style={{ backgroundColor: selectedColor ?? "transparent" }}
-            />
-            <span className="role-preview__name">@{selectedRole.name}</span>
-
-            {selectedRole.hoist ? (
-              <span className="status-badge status-badge--neutral">
-                Hoisted
-              </span>
-            ) : null}
-
-            {selectedRole.mentionable ? (
-              <span className="status-badge status-badge--neutral">
-                Mentionable
-              </span>
-            ) : null}
-
-            {selectedRole.managed ? (
-              <span className="status-badge status-badge--warning">
-                Managed
-              </span>
-            ) : null}
-          </div>
-        ) : (
-          <div
-            className="role-preview role-preview--empty"
-            aria-hidden="true"
-          />
-        )}
-      </div>
 
       <div className="role-select__control">
         <button
