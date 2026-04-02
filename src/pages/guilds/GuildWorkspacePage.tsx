@@ -574,12 +574,23 @@ export function GuildWorkspacePage() {
               onChange={(value) => setField("combat_log_timer_minutes", value)}
             />
 
-            <div className="field">
+            {/*<div className="field">
               <Switch
                 label="Auto restart"
                 checked={Boolean(draft.auto_restart)}
                 hint="Automatically restart the parser or linked service flow when supported."
                 onChange={(checked) => setField("auto_restart", checked)}
+              />
+            </div>*/}
+
+            <div className="field">
+              <Switch
+                label="Enable Combat Rating"
+                checked={Boolean(draft.enable_combat_rating)}
+                hint="A simple ELO engine for PVP to give players combat ratings"
+                onChange={(checked) =>
+                  setField("enable_combat_rating", checked)
+                }
               />
             </div>
 

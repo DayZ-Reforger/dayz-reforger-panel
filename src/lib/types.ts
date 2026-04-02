@@ -157,6 +157,7 @@ export interface GuildAttributes {
   member_role: string;
   issue_member_role: boolean;
   combat_log_timer_minutes: number;
+  enable_combat_rating: boolean;
 }
 
 export interface LinkedGuildsResponse {
