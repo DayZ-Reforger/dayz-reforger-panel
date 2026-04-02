@@ -11,13 +11,18 @@ const PAGE_META: Record<string, { eyebrow: string; title: string }> = {
     eyebrow: "Service connections",
     title: "Integrations",
   },
+  "/dashboard/alarms": {
+    eyebrow: "Manage Alarm zones",
+    title: "Alarm Zones & Rules",
+  },
 };
 
 export function DashboardShell() {
   const location = useLocation();
   const { user } = useAuth();
 
-  const pageMeta = PAGE_META[location.pathname] ?? {
+  const pageMeta = (PAGE_META[location.pathname] ||
+    PAGE_META[location.pathname.split("/").slice(0, -1).join("/")]) ?? {
     eyebrow: "Guild workspace",
     title: "Server configuration",
   };

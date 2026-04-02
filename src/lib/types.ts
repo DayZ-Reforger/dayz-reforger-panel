@@ -118,6 +118,27 @@ export interface GuildNitradoConfig {
   mission?: string;
 }
 
+export type Position = {
+  x: number;
+  y: number;
+};
+
+export type AlarmZone = {
+  id: string;
+  origin: Position;
+  radius: number;
+  name: string;
+  channel: string;
+  role: string;
+  ignoredPlayers: string[];
+  rules: string[];
+  empExempt: boolean;
+  showPlayerCoord: boolean;
+  disabled: boolean;
+  empExpire: unknown;
+  color: string;
+};
+
 export interface GuildAttributes {
   server_id: string;
   owner_id: string;
@@ -143,7 +164,7 @@ export interface GuildAttributes {
   bot_admin_roles: string[];
   admin_alert_role: string;
   web_admin_user_ids: string[];
-  alarms: unknown[];
+  alarms: AlarmZone[];
   events: unknown[];
   uavs: unknown[];
   income_roles: string[];

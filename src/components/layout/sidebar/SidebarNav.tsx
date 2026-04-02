@@ -8,6 +8,7 @@ const navItems = [
   { to: "/dashboard", label: "Overview" },
   { to: "/dashboard/guilds", label: "Guilds" },
   { to: "/dashboard/integrations", label: "Integrations" },
+  { to: "/dashboard/alarms", label: "Alarm Zones" },
 ];
 
 function formatPlan(plan?: string) {

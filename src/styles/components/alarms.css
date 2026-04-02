@@ -1,0 +1,177 @@
+.alarm-map-shell {
+    position: relative;
+    height: min(78vh, 68rem);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.alarm-map {
+    height: 100%;
+    width: 100%;
+    background: #07090d;
+}
+
+.alarm-map-card {
+    display: grid;
+    gap: 1rem;
+}
+
+.alarm-map-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.alarm-map-card__title {
+    margin: 0;
+}
+
+.alarm-map-tooltip {
+    display: grid;
+    gap: 0.2rem;
+}
+
+.leaflet-container {
+    background: #0b0d12 !important;
+}
+.alarm-map-shell {
+    position: relative;
+}
+
+.alarm-map-coordinates {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 900;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.55rem 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    background: rgba(10, 12, 16, 0.88);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+    pointer-events: none;
+}
+
+.alarm-map-coordinates__label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.alarm-map-coordinates__value {
+    color: #f4f4f5;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+.alarm-map .leaflet-container {
+    cursor: crosshair;
+}
+.alarm-map-shell {
+    position: relative;
+}
+
+.alarm-map-coordinates {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 900;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.55rem 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    background: rgba(10, 12, 16, 0.88);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+    pointer-events: none;
+}
+
+.alarm-map-coordinates__label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.alarm-map-coordinates__value {
+    color: #f4f4f5;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.leaflet-tooltip-pane {
+    z-index: 1000 !important;
+}
+
+.alarm-zone-tooltip {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    z-index: 1000 !important;
+}
+
+.alarm-zone-tooltip::before {
+    border-top-color: rgba(15, 18, 24, 0.96) !important;
+}
+
+.alarm-zone-tooltip .leaflet-tooltip-content {
+    margin: 0 !important;
+}
+
+.alarm-zone-tooltip__content {
+    min-width: 12rem;
+    padding: 0.8rem 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    background: rgba(15, 18, 24, 0.96);
+    color: #f4f4f5;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.34);
+    backdrop-filter: blur(12px);
+}
+
+.alarm-zone-tooltip__title {
+    margin-bottom: 0.55rem;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.alarm-zone-tooltip__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.alarm-zone-tooltip__row + .alarm-zone-tooltip__row {
+    margin-top: 0.35rem;
+}
+
+.alarm-zone-tooltip__label {
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.alarm-zone-tooltip__value {
+    color: #f4f4f5;
+    font-size: 0.84rem;
+    font-weight: 600;
+    text-align: right;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}

@@ -10,6 +10,7 @@ type GuildBotSetupState = {
 };
 
 interface Props {
+  origin: string;
   guilds: EnrichedGuild[];
   services: NitradoServiceSummary[];
   linkingGuildId: string | null;
@@ -20,6 +21,7 @@ interface Props {
 }
 
 export function GuildTable({
+  origin,
   guilds,
   services,
   linkingGuildId,
@@ -159,7 +161,11 @@ export function GuildTable({
 
                         <Link
                           className="action-link"
-                          to={`/dashboard/guilds/${guild.id}`}
+                          to={
+                            origin == "guilds"
+                              ? `/dashboard/guilds/${guild.id}`
+                              : `/dashboard/alarms/${guild.id}`
+                          }
                         >
                           Open workspace
                         </Link>
@@ -167,7 +173,11 @@ export function GuildTable({
                     ) : (
                       <Link
                         className="action-link"
-                        to={`/dashboard/guilds/${guild.id}`}
+                        to={
+                          origin == "guilds"
+                            ? `/dashboard/guilds/${guild.id}`
+                            : `/dashboard/alarms/${guild.id}`
+                        }
                       >
                         Open workspace
                       </Link>

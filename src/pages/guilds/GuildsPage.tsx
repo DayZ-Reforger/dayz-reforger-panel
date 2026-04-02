@@ -17,7 +17,11 @@ type GuildBotSetupState = {
   inviteUrl?: string;
 };
 
-export function GuildsPage() {
+type Props = {
+  origin: string;
+};
+
+export function GuildsPage({ origin }: Props) {
   const { user, refreshUser } = useAuth();
   const [guilds, setGuilds] = useState<DiscordGuild[]>([]);
   const [linkedGuilds, setLinkedGuilds] = useState<GuildConfig[]>([]);
@@ -84,7 +88,10 @@ export function GuildsPage() {
       setGuilds(guildsResponse.guilds);
       setLinkedGuilds(linkedResponse.guilds);
       setServices(servicesResponse.services);
-      loadBotSetupStates(enrichedGuilds);
+
+      useEffect(() => {
+        loadBotSetupStates(enrichedGuilds).catch(() => undefined);
+      }, [enrichedGuilds]);
     } catch (loadError) {
       setError(
         loadError instanceof Error
@@ -155,8 +162,16 @@ export function GuildsPage() {
   return (
     <div className="page-grid">
       <SectionCard
-        title="Guild workspaces"
-        description="Link a Nitrado DayZ Services to a guild and manage your configurations"
+        title={
+          origin == "guilds"
+            ? "Guild workspaces"
+            : "Guild Alarm Zone workspaces"
+        }
+        description={
+          origin == "guilds"
+            ? "Link a Nitrado DayZ Services to a guild and manage your configurations"
+            : "Choose a linked guild to manage alarm zones"
+        }
       >
         <div className="row-between block-gap">
           <StatusBadge tone={user?.nitrado ? "success" : "neutral"}>
@@ -180,7 +195,12 @@ export function GuildsPage() {
           <p className="muted-text">Loading guilds...</p>
         ) : (
           <GuildTable
-            guilds={enrichedGuilds}
+            origin={origin}
+            guilds={
+              origin == "guilds"
+                ? enrichedGuilds
+                : enrichedGuilds.filter((guild) => guild.linked_service_id)
+            }
             services={services}
             linkingGuildId={linkingGuildId}
             botSetupByGuildId={botSetupByGuildId}
