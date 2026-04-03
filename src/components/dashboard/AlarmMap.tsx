@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import {
   Circle,
   ImageOverlay,
@@ -6,6 +6,7 @@ import {
   Marker,
   Pane,
   Tooltip,
+  useMapEvents,
 } from "react-leaflet";
 import { CRS, DivIcon, type LatLngBoundsExpression } from "leaflet";
 import { ALARM_MAPS, normalizeMission } from "../../lib/alarmMapConfig";
@@ -16,8 +17,50 @@ import {
   worldRadiusToImagePixels,
 } from "../../lib/alarmMapMath";
 
-import { useState } from "react";
-import { useMapEvents } from "react-leaflet";
+type CursorTrackerProps = {
+  worldWidth: number;
+  worldHeight: number;
+  imageWidth: number;
+  imageHeight: number;
+  onCursorChange: (coords: Position | null) => void;
+  onHoverChange: (hovered: boolean) => void;
+};
+
+function CursorTracker({
+  worldWidth,
+  worldHeight,
+  imageWidth,
+  imageHeight,
+  onCursorChange,
+  onHoverChange,
+}: CursorTrackerProps) {
+  useMapEvents({
+    mousemove(event) {
+      const coords = imagePointToWorld(
+        [event.latlng.lat, event.latlng.lng],
+        worldWidth,
+        worldHeight,
+        imageWidth,
+        imageHeight,
+      );
+
+      onCursorChange({
+        x: Math.round(coords.x),
+        y: Math.round(coords.y),
+      });
+      onHoverChange(true);
+    },
+    mouseover() {
+      onHoverChange(true);
+    },
+    mouseout() {
+      onHoverChange(false);
+      onCursorChange(null);
+    },
+  });
+
+  return null;
+}
 
 function CursorCoordinates({
   worldWidth,
@@ -83,6 +126,9 @@ function makeCenterIcon(color: string): DivIcon {
 }
 
 export function AlarmMap({ mission, zones = [] }: Props) {
+  const [cursorCoords, setCursorCoords] = useState<Position | null>(null);
+  const [mapHovered, setMapHovered] = useState(false);
+  const [copiedCoords, setCopiedCoords] = useState(false);
   const mapDefinition = useMemo(() => {
     return ALARM_MAPS[normalizeMission(mission)];
   }, [mission]);
@@ -100,6 +146,45 @@ export function AlarmMap({ mission, zones = [] }: Props) {
       mapDefinition.imagePixelWidth / 2,
     ];
   }, [mapDefinition]);
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      const activeElement = document.activeElement;
+      const isTyping =
+        activeElement instanceof HTMLInputElement ||
+        activeElement instanceof HTMLTextAreaElement ||
+        activeElement instanceof HTMLSelectElement ||
+        activeElement?.getAttribute("contenteditable") === "true";
+
+      if (isTyping) {
+        return;
+      }
+
+      if (!mapHovered || !cursorCoords) {
+        return;
+      }
+
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "c") {
+        event.preventDefault();
+
+        const text = `${cursorCoords.x}, ${cursorCoords.y}`;
+
+        navigator.clipboard
+          .writeText(text)
+          .then(() => {
+            setCopiedCoords(true);
+            window.setTimeout(() => setCopiedCoords(false), 1200);
+          })
+          .catch(() => undefined);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [mapHovered, cursorCoords]);
 
   return (
     <div className="alarm-map-card">
@@ -165,10 +250,10 @@ export function AlarmMap({ mission, zones = [] }: Props) {
                     pathOptions={{
                       color: zone.color,
                       fillColor: zone.color,
-                      fillOpacity: 0.16,
+                      fillOpacity: 0.24,
                       opacity: 1,
-                      weight: 2,
-                      dashArray: zone.disabled ? "6 6" : undefined,
+                      weight: 3,
+                      dashArray: zone.disabled ? "8 8" : undefined,
                     }}
                   >
                     <Tooltip
@@ -222,6 +307,32 @@ export function AlarmMap({ mission, zones = [] }: Props) {
             imageWidth={mapDefinition.imagePixelWidth}
             imageHeight={mapDefinition.imagePixelHeight}
           />
+          <CursorTracker
+            worldWidth={mapDefinition.worldWidth}
+            worldHeight={mapDefinition.worldHeight}
+            imageWidth={mapDefinition.imagePixelWidth}
+            imageHeight={mapDefinition.imagePixelHeight}
+            onCursorChange={setCursorCoords}
+            onHoverChange={setMapHovered}
+          />
+          <div
+            className={`alarm-map-coordinates${copiedCoords ? " is-copied" : ""}`}
+          >
+            <span className="alarm-map-coordinates__label">
+              {copiedCoords ? "Copied" : "Cursor"}
+            </span>
+            <span className="alarm-map-coordinates__value">
+              {cursorCoords
+                ? `X: ${cursorCoords.x}  Y: ${cursorCoords.y}`
+                : "—"}
+            </span>
+          </div>
+
+          {copiedCoords ? (
+            <div className="alarm-map-copy-toast">
+              Coordinates copied to clipboard
+            </div>
+          ) : null}
         </MapContainer>
       </div>
     </div>

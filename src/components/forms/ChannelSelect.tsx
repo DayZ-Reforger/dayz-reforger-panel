@@ -31,7 +31,6 @@ export function ChannelSelect({
   unsetLabel = "Not set",
 }: ChannelSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
-
   const rootRef = useRef<HTMLDivElement | null>(null);
 
   const selectedChannel = useMemo(() => {
@@ -86,10 +85,12 @@ export function ChannelSelect({
   }
 
   return (
-    <div className="channel-field" ref={rootRef}>
-      <label className="channel-field__label" htmlFor={id}>
+    <div className="channel-field field" ref={rootRef}>
+      <label className="field__label" htmlFor={id}>
         {label}
       </label>
+
+      {hint ? <p className="field__hint">{hint}</p> : null}
 
       <div className="channel-field__control">
         <button
@@ -191,8 +192,6 @@ export function ChannelSelect({
           </div>
         ) : null}
       </div>
-
-      {hint ? <div className="channel-field__hint">{hint}</div> : null}
     </div>
   );
 }

@@ -130,12 +130,12 @@ export type AlarmZone = {
   name: string;
   channel: string;
   role: string;
-  ignoredPlayers: string[];
+  ignored_players: string[];
   rules: string[];
-  empExempt: boolean;
-  showPlayerCoord: boolean;
+  emp_exempt: boolean;
+  show_player_coords: boolean;
   disabled: boolean;
-  empExpire: unknown;
+  emp_expire: unknown;
   color: string;
 };
 

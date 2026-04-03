@@ -29,55 +29,13 @@
     margin: 0;
 }
 
-.alarm-map-tooltip {
-    display: grid;
-    gap: 0.2rem;
-}
-
 .leaflet-container {
     background: #0b0d12 !important;
 }
-.alarm-map-shell {
-    position: relative;
-}
 
-.alarm-map-coordinates {
-    position: absolute;
-    right: 1rem;
-    bottom: 1rem;
-    z-index: 900;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
-    padding: 0.55rem 0.8rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    background: rgba(10, 12, 16, 0.88);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
-    pointer-events: none;
-}
-
-.alarm-map-coordinates__label {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-}
-
-.alarm-map-coordinates__value {
-    color: #f4f4f5;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    font-size: 0.9rem;
-    font-weight: 600;
-}
 .alarm-map .leaflet-container {
     cursor: crosshair;
 }
-.alarm-map-shell {
-    position: relative;
-}
 
 .alarm-map-coordinates {
     position: absolute;
@@ -109,6 +67,44 @@
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     font-size: 0.9rem;
     font-weight: 600;
+}
+
+.alarm-map-coordinates.is-copied {
+    border-color: rgba(240, 140, 46, 0.28);
+    box-shadow:
+        0 0 0 1px rgba(240, 140, 46, 0.12),
+        0 12px 28px rgba(0, 0, 0, 0.28);
+}
+
+.alarm-map-copy-toast {
+    position: absolute;
+    left: 50%;
+    bottom: 1.25rem;
+    transform: translateX(-50%);
+    z-index: 950;
+    padding: 0.7rem 1rem;
+    border: 1px solid rgba(240, 140, 46, 0.28);
+    border-radius: 12px;
+    background: rgba(20, 23, 30, 0.96);
+    color: #f4f4f5;
+    font-size: 0.88rem;
+    font-weight: 600;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.34);
+    backdrop-filter: blur(12px);
+    pointer-events: none;
+    animation: alarm-copy-toast-in 180ms ease-out;
+}
+
+@keyframes alarm-copy-toast-in {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
 }
 
 .leaflet-tooltip-pane {
@@ -174,4 +170,164 @@
     font-weight: 600;
     text-align: right;
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.field--error input,
+.field--error .channel-field__trigger,
+.field--error .role-select__trigger {
+    border-color: rgba(255, 107, 107, 0.42) !important;
+}
+
+.field__error {
+    margin-top: 0.45rem;
+    color: #ffb4a8;
+    font-size: 0.8rem;
+}
+
+.field--full {
+    grid-column: 1 / -1;
+}
+
+.alarm-create-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(20rem, 0.8fr);
+    gap: 1rem;
+    align-items: start;
+}
+
+.alarm-create-form {
+    display: grid;
+    gap: 1rem;
+}
+
+.alarm-form-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: start;
+}
+
+.alarm-form-row--full {
+    grid-template-columns: 1fr;
+}
+
+.alarm-form-row--coords {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.alarm-form-row--selectors {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.alarm-form-row--selectors > .field {
+    display: flex;
+    flex-direction: column;
+}
+
+.alarm-form-row--selectors .field__hint {
+    min-height: 2.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.alarm-create-sidebar {
+    position: sticky;
+    top: 1rem;
+}
+
+.alarm-create-summary {
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.alarm-create-summary h3 {
+    margin: 0 0 0.35rem;
+}
+
+.alarm-create-summary__list {
+    display: grid;
+    gap: 0.65rem;
+    margin-top: 1rem;
+}
+
+.alarm-create-summary__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.alarm-create-summary__row span {
+    color: rgba(255, 255, 255, 0.58);
+}
+
+.alarm-create-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.alarm-color-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.alarm-color-swatch {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+
+.alarm-color-swatch.is-selected {
+    border-color: #ffffff;
+    box-shadow:
+        0 0 0 3px rgba(240, 140, 46, 0.18),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+.alarm-switch-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: stretch;
+}
+
+.alarm-switch-grid > * {
+    display: flex;
+    flex-direction: column;
+    min-height: 9rem;
+}
+
+.alarm-switch-grid .field__hint,
+.alarm-switch-grid .switch__hint {
+    min-height: 3rem;
+}
+
+.alarm-switch-grid .switch,
+.alarm-switch-grid .switch-field,
+.alarm-switch-grid .switch-row {
+    margin-top: auto;
+}
+
+@media (max-width: 1100px) {
+    .alarm-create-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .alarm-form-row,
+    .alarm-form-row--coords,
+    .alarm-form-row--selectors {
+        grid-template-columns: 1fr;
+    }
+
+    .alarm-create-sidebar {
+        position: static;
+    }
+
+    .alarm-switch-grid {
+        grid-template-columns: 1fr;
+    }
 }

@@ -19,6 +19,7 @@ import { RoleMultiSelect } from "../../components/forms/RoleMultiSelect";
 import { RoleSelect } from "../../components/forms/RoleSelect";
 import { Switch } from "../../components/forms/Switch";
 import { useAuth } from "../../app/providers/AuthProvider";
+import { NumberField } from "../../components/forms/NumberField";
 
 const TAB_LABELS = [
   "overview",
@@ -657,26 +658,5 @@ export function GuildWorkspacePage() {
         }}
       />
     </div>
-  );
-}
-
-function NumberField<T extends number>({
-  label,
-  value,
-  onChange,
-}: {
-  label: string;
-  value: T;
-  onChange: (value: T) => void;
-}) {
-  return (
-    <label className="field">
-      <span>{label}</span>
-      <input
-        type="number"
-        value={value}
-        onChange={(event) => onChange(Number(event.target.value) as T)}
-      />
-    </label>
   );
 }

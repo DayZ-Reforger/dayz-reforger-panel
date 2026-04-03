@@ -402,3 +402,26 @@
 .role-preview .status-badge {
     flex: 0 0 auto;
 }
+.alarm-switch-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: stretch;
+}
+
+.alarm-switch-grid > * {
+    display: flex;
+    flex-direction: column;
+    min-height: 9rem;
+}
+
+.alarm-switch-grid .field__hint,
+.alarm-switch-grid .switch__hint {
+    min-height: 3rem;
+}
+
+.alarm-switch-grid .switch,
+.alarm-switch-grid .switch-field,
+.alarm-switch-grid .switch-row {
+    margin-top: auto;
+}
